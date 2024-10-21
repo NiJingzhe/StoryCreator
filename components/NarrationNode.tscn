@@ -1,0 +1,189 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcen4sg0h82vr"]
+
+[ext_resource type="StyleBox" uid="uid://e2yf03ntxhrb" path="res://assets/style/plotnode/normal_pannel_narrationnode.tres" id="1_pkm2w"]
+[ext_resource type="StyleBox" uid="uid://d0vc33yp3h2rc" path="res://assets/style/plotnode/selected_pannel_narrationnode.tres" id="2_k1mjp"]
+[ext_resource type="StyleBox" uid="uid://cs0d8ipr0o4o7" path="res://assets/style/plotnode/normal_titlebar_narrationnode.tres" id="3_7tchk"]
+[ext_resource type="Script" path="res://code/NarrationNode.gd" id="4_0wxkv"]
+[ext_resource type="StyleBox" uid="uid://ejbotnkvr6tc" path="res://assets/style/plotnode/selected_titlebar_narrationnode.tres" id="4_k1y6s"]
+[ext_resource type="StyleBox" uid="uid://dtprptd3pajuc" path="res://assets/style/textbox/normal.tres" id="5_nqlyv"]
+[ext_resource type="StyleBox" uid="uid://cw0soia3heuwr" path="res://assets/style/textbox/focus.tres" id="6_exldd"]
+[ext_resource type="StyleBox" uid="uid://b8rjj6b3sty0v" path="res://assets/style/button/normal.tres" id="8_sh10v"]
+[ext_resource type="StyleBox" uid="uid://n4nww25bt7nl" path="res://assets/style/button/hover.tres" id="9_81dwn"]
+[ext_resource type="StyleBox" uid="uid://k3xf7teubqco" path="res://assets/style/button/press.tres" id="10_phq1u"]
+
+[node name="NarrationNode" type="GraphNode"]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 300.0
+offset_bottom = 300.0
+theme_override_styles/panel = ExtResource("1_pkm2w")
+theme_override_styles/panel_selected = ExtResource("2_k1mjp")
+theme_override_styles/titlebar = ExtResource("3_7tchk")
+theme_override_styles/titlebar_selected = ExtResource("4_k1y6s")
+resizable = true
+title = "Narration"
+slot/0/left_enabled = true
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = true
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("4_0wxkv")
+type = "plot"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 16
+current_tab = 0
+
+[node name="Content" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_tab_index = 0
+
+[node name="ContentEditor" type="TextEdit" parent="TabContainer/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Input narration content here"
+wrap_mode = 1
+scroll_smooth = true
+scroll_past_end_of_file = true
+caret_blink = true
+
+[node name="Condition" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_tab_index = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Condition"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="ConditionContainer" type="VBoxContainer" parent="TabContainer/Condition/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ConditionButton" type="Button" parent="TabContainer/Condition"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.1
+theme_override_styles/hover = ExtResource("9_81dwn")
+theme_override_styles/pressed = ExtResource("10_phq1u")
+theme_override_styles/normal = ExtResource("8_sh10v")
+text = "添加条件
+"
+
+[node name="Props" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Title" type="MarginContainer" parent="TabContainer/Props"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Props/Title"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Label" type="Label" parent="TabContainer/Props/Title/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 16
+text = "概要"
+
+[node name="SummaryBox" type="TextEdit" parent="TabContainer/Props/Title/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.42
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("5_nqlyv")
+theme_override_styles/focus = ExtResource("6_exldd")
+placeholder_text = "输入概要"
+scroll_smooth = true
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="Head" type="MarginContainer" parent="TabContainer/Props"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Props/Head"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="label" type="Label" parent="TabContainer/Props/Head/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 16
+text = "是起始节点"
+vertical_alignment = 1
+
+[node name="HeadCheck" type="CheckButton" parent="TabContainer/Props/Head/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 12
+keep_pressed_outside = true
+alignment = 1
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Loop" type="MarginContainer" parent="TabContainer/Props"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Props/Loop"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="label" type="Label" parent="TabContainer/Props/Loop/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.3
+theme_override_font_sizes/font_size = 16
+text = "可多次触发"
+vertical_alignment = 1
+
+[node name="LoopMode" type="CheckButton" parent="TabContainer/Props/Loop/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 12
+keep_pressed_outside = true
+alignment = 1
+clip_text = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="text_changed" from="TabContainer/Content/ContentEditor" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="TabContainer/Condition/ConditionButton" to="." method="_on_condition_button_pressed"]
+[connection signal="text_changed" from="TabContainer/Props/Title/HBoxContainer/SummaryBox" to="." method="_on_summary_box_text_changed"]
+[connection signal="toggled" from="TabContainer/Props/Head/HBoxContainer/HeadCheck" to="." method="_on_head_check_toggled"]
+[connection signal="toggled" from="TabContainer/Props/Loop/HBoxContainer/LoopMode" to="." method="_on_loop_mode_toggled"]

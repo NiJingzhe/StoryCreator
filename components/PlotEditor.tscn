@@ -1,0 +1,171 @@
+[gd_scene load_steps=7 format=3 uid="uid://wup7rv8jtshq"]
+
+[ext_resource type="StyleBox" uid="uid://b8rjj6b3sty0v" path="res://assets/style/button/normal.tres" id="1_4bwjr"]
+[ext_resource type="Script" path="res://code/PlotEditor.gd" id="1_r2g2o"]
+[ext_resource type="StyleBox" uid="uid://n4nww25bt7nl" path="res://assets/style/button/hover.tres" id="2_ltevd"]
+[ext_resource type="StyleBox" uid="uid://k3xf7teubqco" path="res://assets/style/button/press.tres" id="3_xjdq1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2vah"]
+bg_color = Color(0.130772, 0.130772, 0.130772, 0.443137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3powi"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.83251, 0.378997, 0.35026, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.94334, 0.124162, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="PlotEditor" type="GraphEdit"]
+custom_minimum_size = Vector2(800, 400)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -352.0
+offset_bottom = -248.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/connection_rim_color = Color(0.198968, 0.5044, 0.599299, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_m2vah")
+scroll_offset = Vector2(-352, -248)
+snapping_enabled = false
+right_disconnects = true
+connection_lines_thickness = 3.0
+show_zoom_label = true
+script = ExtResource("1_r2g2o")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 10
+
+[node name="SpeakButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/hover = ExtResource("2_ltevd")
+theme_override_styles/pressed = ExtResource("3_xjdq1")
+theme_override_styles/normal = ExtResource("1_4bwjr")
+text = "new Dialog
+"
+
+[node name="NarrationButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/hover = ExtResource("2_ltevd")
+theme_override_styles/pressed = ExtResource("3_xjdq1")
+theme_override_styles/normal = ExtResource("1_4bwjr")
+text = "new Narration
+"
+
+[node name="ChoiceButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/hover = ExtResource("2_ltevd")
+theme_override_styles/pressed = ExtResource("3_xjdq1")
+theme_override_styles/normal = ExtResource("1_4bwjr")
+text = "new Choice"
+
+[node name="ActionButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/hover = ExtResource("2_ltevd")
+theme_override_styles/pressed = ExtResource("3_xjdq1")
+theme_override_styles/normal = ExtResource("1_4bwjr")
+text = "new Action
+"
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+unique_name_in_owner = true
+size = Vector2i(100, 35)
+submenu_popup_delay = 0.2
+item_count = 4
+item_0/text = "删除节点"
+item_1/text = "复制"
+item_1/id = 1
+item_2/text = "粘贴"
+item_2/id = 2
+item_3/text = "剪切"
+item_3/id = 3
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+title = "不支持的操作"
+initial_position = 2
+size = Vector2i(400, 200)
+always_on_top = true
+transparent = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_3powi")
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 395.0
+offset_bottom = 195.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Label2" type="Label" parent="PopupPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "⚠Unsupported Operation"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="ErrMsg" type="Label" parent="PopupPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Action和Choice节点只能和Plot节点链接"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="ErrConfirmButton" type="Button" parent="PopupPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_styles/hover = ExtResource("2_ltevd")
+theme_override_styles/pressed = ExtResource("3_xjdq1")
+theme_override_styles/normal = ExtResource("1_4bwjr")
+text = "I Got It"
+
+[connection signal="connection_request" from="." to="." method="_on_connection_request"]
+[connection signal="disconnection_request" from="." to="." method="_on_disconnection_request"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SpeakButton" to="." method="_on_speak_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/NarrationButton" to="." method="_on_narration_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ChoiceButton" to="." method="_on_choice_button_pressed"]
+[connection signal="index_pressed" from="PopupMenu" to="." method="_on_popup_menu_index_pressed"]
+[connection signal="pressed" from="PopupPanel/MarginContainer/VBoxContainer/ErrConfirmButton" to="." method="_on_err_confirm_button_pressed"]

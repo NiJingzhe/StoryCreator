@@ -1,0 +1,408 @@
+[gd_scene load_steps=12 format=3 uid="uid://bf7eqdeehkk31"]
+
+[ext_resource type="StyleBox" uid="uid://b8rjj6b3sty0v" path="res://assets/style/button/normal.tres" id="1_3kj4g"]
+[ext_resource type="Script" path="res://code/EditorPage.gd" id="1_x4en4"]
+[ext_resource type="StyleBox" uid="uid://k3xf7teubqco" path="res://assets/style/button/press.tres" id="2_v6ohk"]
+[ext_resource type="StyleBox" uid="uid://n4nww25bt7nl" path="res://assets/style/button/hover.tres" id="3_056j6"]
+[ext_resource type="Script" path="res://code/PlotEditorPage.gd" id="4_co37x"]
+[ext_resource type="Texture2D" uid="uid://1d57focyayw1" path="res://assets/icon/PlotTabButton.png" id="5_ksg03"]
+[ext_resource type="Texture2D" uid="uid://35xkn2vr2p25" path="res://assets/icon/DatabaseTabButton.png" id="6_2ss7p"]
+[ext_resource type="Texture2D" uid="uid://diifdrmb4eagm" path="res://assets/icon/ActionTabButton.png" id="7_8xnte"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7adu5"]
+bg_color = Color(0.113435, 0.194213, 0.249097, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r8w8w"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0175031, 0.0949937, 0.14006, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udr83"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="EditorPage" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x4en4")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7adu5")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 3
+alignment = 1
+
+[node name="MenuPannel" type="PanelContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_r8w8w")
+
+[node name="MenuBar" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel"]
+clip_children = 1
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.05
+
+[node name="FileButton" type="MenuButton" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/MenuBar"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 12
+theme_override_styles/hover = ExtResource("3_056j6")
+theme_override_styles/pressed = ExtResource("2_v6ohk")
+theme_override_styles/normal = ExtResource("1_3kj4g")
+button_pressed = true
+keep_pressed_outside = true
+text = "File
+"
+icon_alignment = 1
+switch_on_hover = true
+item_count = 8
+popup/item_0/text = "New File"
+popup/item_1/text = "Open File"
+popup/item_1/id = 5
+popup/item_2/id = 4
+popup/item_2/separator = true
+popup/item_3/text = "Save File"
+popup/item_3/id = 1
+popup/item_4/text = "Save As"
+popup/item_4/id = 4
+popup/item_5/text = "Save All"
+popup/item_5/id = 6
+popup/item_6/id = 6
+popup/item_6/separator = true
+popup/item_7/text = "Open Folder"
+popup/item_7/id = 7
+
+[node name="ProjButton" type="MenuButton" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/MenuBar"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 12
+theme_override_styles/hover = ExtResource("3_056j6")
+theme_override_styles/pressed = ExtResource("2_v6ohk")
+theme_override_styles/normal = ExtResource("1_3kj4g")
+button_pressed = true
+text = "Project
+"
+icon_alignment = 1
+switch_on_hover = true
+item_count = 5
+popup/item_0/text = "New Project"
+popup/item_1/text = "Open Project"
+popup/item_1/id = 1
+popup/item_2/id = 2
+popup/item_2/separator = true
+popup/item_3/text = "Save Project"
+popup/item_3/id = 3
+popup/item_4/text = "Save Project As"
+popup/item_4/id = 4
+
+[node name="EditorTabBar" type="HBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel"]
+clip_children = 1
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.05
+theme_override_constants/separation = 15
+
+[node name="PlotTabButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/EditorTabBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/hover = ExtResource("3_056j6")
+theme_override_styles/pressed = ExtResource("2_v6ohk")
+theme_override_styles/normal = ExtResource("1_3kj4g")
+keep_pressed_outside = true
+text = "Plot"
+icon = ExtResource("5_ksg03")
+flat = true
+expand_icon = true
+
+[node name="DataBaseTabButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/EditorTabBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 12
+theme_override_styles/hover = ExtResource("3_056j6")
+theme_override_styles/pressed = ExtResource("2_v6ohk")
+theme_override_styles/normal = ExtResource("1_3kj4g")
+text = "Database"
+icon = ExtResource("6_2ss7p")
+flat = true
+expand_icon = true
+
+[node name="ActionTabButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/EditorTabBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.5
+theme_override_font_sizes/font_size = 12
+theme_override_styles/hover = ExtResource("3_056j6")
+theme_override_styles/pressed = ExtResource("2_v6ohk")
+theme_override_styles/normal = ExtResource("1_3kj4g")
+text = "Action"
+icon = ExtResource("7_8xnte")
+flat = true
+expand_icon = true
+
+[node name="EditorTabContainer" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_udr83")
+current_tab = 1
+tabs_visible = false
+
+[node name="剧情" type="HSplitContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+theme_override_constants/minimum_grab_thickness = 3
+script = ExtResource("4_co37x")
+metadata/_tab_index = 0
+
+[node name="HSplitContainer" type="HSplitContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+theme_override_constants/minimum_grab_thickness = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FileTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 12
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="Files" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/FileTab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/FileTab/Files"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/FileTab/Files/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="FileTree" type="Tree" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/FileTab/Files/VBoxContainer/MarginContainer"]
+layout_mode = 2
+allow_rmb_select = true
+select_mode = 2
+
+[node name="PropertyTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 12
+current_tab = 0
+
+[node name="File Properties" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/PropertyTab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/PropertyTab/File Properties"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer/VBoxContainer/PropertyTab/File Properties/MarginContainer"]
+layout_mode = 2
+
+[node name="EditorTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.68
+tabs_rearrange_group = 0
+
+[node name="PropertyTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情"]
+clip_contents = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 12
+current_tab = 0
+
+[node name="Switches" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab/Switches"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab/Switches/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab/Switches/VBoxContainer/ScrollContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 5
+
+[node name="SwitchContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab/Switches/VBoxContainer/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddSwitch" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab/Switches/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/hover = ExtResource("3_056j6")
+theme_override_styles/pressed = ExtResource("2_v6ohk")
+theme_override_styles/normal = ExtResource("1_3kj4g")
+text = "Add Switch
+"
+
+[node name="数据库" type="HSplitContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer"]
+clip_contents = true
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="SheetTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 12
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="Data Sheets" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer/SheetTab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer/SheetTab/Data Sheets"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer/SheetTab/Data Sheets/MarginContainer"]
+layout_mode = 2
+
+[node name="PropertyTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 0
+theme_override_font_sizes/font_size = 12
+current_tab = 0
+
+[node name="Sheet Properties" type="ScrollContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer/PropertyTab"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer/PropertyTab/Sheet Properties"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/VBoxContainer/PropertyTab/Sheet Properties/MarginContainer"]
+layout_mode = 2
+
+[node name="SheetTab" type="TabContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+
+[node name="Data Sheet Editor" type="GridContainer" parent="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/数据库/SheetTab"]
+clip_contents = true
+layout_mode = 2
+metadata/_tab_index = 0
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/EditorTabBar/PlotTabButton" to="." method="_on_plot_tab_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/EditorTabBar/DataBaseTabButton" to="." method="_on_data_base_tab_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/MenuPannel/EditorTabBar/ActionTabButton" to="." method="_on_action_tab_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情/PropertyTab/Switches/VBoxContainer/AddSwitch" to="PanelContainer/MarginContainer/HBoxContainer/EditorTabContainer/剧情" method="_on_add_switch_pressed"]

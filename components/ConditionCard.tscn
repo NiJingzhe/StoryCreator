@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2x174khbtm5y"]
+
+[ext_resource type="Script" path="res://code/ConditionCard.gd" id="1_cj7ed"]
+[ext_resource type="StyleBox" uid="uid://b8rjj6b3sty0v" path="res://assets/style/button/normal.tres" id="3_8b30r"]
+[ext_resource type="StyleBox" uid="uid://n4nww25bt7nl" path="res://assets/style/button/hover.tres" id="4_jau8u"]
+[ext_resource type="StyleBox" uid="uid://k3xf7teubqco" path="res://assets/style/button/press.tres" id="5_kiu11"]
+
+[node name="ConditionCard" type="MarginContainer"]
+offset_right = 295.0
+offset_bottom = 43.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_cj7ed")
+
+[node name="HboxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemList" type="OptionButton" parent="HboxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/hover = ExtResource("4_jau8u")
+theme_override_styles/pressed = ExtResource("5_kiu11")
+theme_override_styles/normal = ExtResource("3_8b30r")
+alignment = 1
+clip_text = true
+
+[node name="CheckBox" type="CheckButton" parent="HboxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 14
+button_pressed = true
+button_mask = 3
+text = "Require on"
+alignment = 1
+icon_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HboxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="DeleteButton" type="Button" parent="HboxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.2
+theme_override_styles/hover = ExtResource("4_jau8u")
+theme_override_styles/pressed = ExtResource("5_kiu11")
+theme_override_styles/normal = ExtResource("3_8b30r")
+text = "×"
+
+[connection signal="item_selected" from="HboxContainer/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="pressed" from="HboxContainer/ItemList" to="." method="_on_item_list_pressed"]
+[connection signal="toggled" from="HboxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="HboxContainer/VBoxContainer2/DeleteButton" to="." method="_on_delete_button_pressed"]
